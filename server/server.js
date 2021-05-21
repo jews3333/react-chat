@@ -24,12 +24,11 @@ app.get('/', (req, res, next) => {
 });
 
 io.on('connection', (socket) => {
-    socket.on('room', (user) => {
-        console.log(user);
-        socket.join(user);
+    socket.on('room', (id) => {
+        socket.join(id);
     });
 
-    socket.on('alert', (toUser) => {
-        io.to(toUser).emit('wake', toUser);
+    socket.on('message', (id, message) => {
+        io.to(id).emit('pop', message);
     });
 });

@@ -1,0 +1,60 @@
+@font-face {
+	font-family:'GmarketSans'; font-style:normal; font-weight:100;
+	src: url('../fonts/GmarketSansLight.woff') format('woff'), url('../fonts/GmarketSansLight.ttf') format('truetype');
+}
+
+@font-face {
+	font-family:'GmarketSans'; font-style:normal; font-weight:400;
+	src: url('../fonts/GmarketSansMedium.woff') format('woff'), url('../fonts/GmarketSansMedium.ttf') format('truetype');
+}
+
+@font-face {
+	font-family:'GmarketSans'; font-style:normal; font-weight:700;
+	src: url('../fonts/GmarketSansBold.woff') format('woff'), url('../fonts/GmarketSansBold.ttf') format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 15px;
+    font-weight:normal;
+}
+
+body {
+    font-size:1em;
+    line-height: 1;
+    font-family: "GmarketSans", sans-serif;
+    background:#000;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button {
+    font-family: inherit;
+    font-size: 0.9em;
+    background:none;
+    border:0;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+input[type=text],
+input[type=file],
+input[type=password],
+input[type=number],
+input[type=select],
+textarea {
+    padding:0 0.5em;
+    min-height: 2.5em;
+    border:1px solid #ccc;
+    border-radius: 0;
+    font-size: 0.9em;
+    font-family: inherit;
+}
