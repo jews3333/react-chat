@@ -2,7 +2,15 @@ import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import Item from './Item';
 
-const socket = io("http://localhost:3001");
+let url = '';
+
+if(process.env.NODE_ENV == 'development'){
+    url = 'http://localhost:3001';
+} else {
+    url = 'https://my-react-chatting.herokuapp.com:3001';
+}
+
+const socket = io(url);
 
 function Chat(props){
 
