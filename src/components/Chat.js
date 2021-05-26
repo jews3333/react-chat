@@ -10,7 +10,7 @@ if(process.env.NODE_ENV == 'development'){
     url = 'https://my-react-chatting.herokuapp.com:3001';
 }
 
-const socket = io(url);
+const socket = io('https://my-react-chatting.herokuapp.com:3001');
 
 function Chat(props){
 
@@ -26,7 +26,6 @@ function Chat(props){
                 user: usr,
                 message: msg
             });
-            console.log(recentChat);
         });
     },[]);
 
