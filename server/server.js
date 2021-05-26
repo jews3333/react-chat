@@ -13,7 +13,7 @@ const io = socketio(server, {
         methods: ['GET','POST']
     }
 });
-const port = 3001;
+const port = process.env.PORT;
 
 server.listen(port, () => {
     console.log(`Listening on port ${port}`);
