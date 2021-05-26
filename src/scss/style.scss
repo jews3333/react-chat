@@ -1,6 +1,6 @@
 #app {
     background:rgb(15, 158, 168);
-    max-width:640px;
+    max-width:480px;
     margin:0 auto;
     height:100vh;
     position:relative;
@@ -9,7 +9,43 @@
 #chatArea {
     position:relative;
     height:100%;
-    overflow: hidden;
+    overflow-y: auto;
+
+    .item {
+        padding: 1em;
+
+        .user {
+            font-size:1.1em;
+            font-weight: bold;
+        }
+
+        .message {
+            background: #fff;
+            display:inline-block;
+            vertical-align: top;
+            padding:0.5em;
+            line-height: 1.2;
+            margin-top:0.5em;
+            border-radius: 0.5em;
+        }
+
+        &.self {
+            .user {
+                text-align: right;
+            }
+
+            .message {
+                float:right;
+                background:rgb(255, 247, 141);
+            }
+        }
+
+        &:after {
+            content:"";
+            display:block;
+            clear:both;
+        }
+    }
 }
 
 #chatForm {

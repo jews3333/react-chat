@@ -4,17 +4,33 @@ import Item from './Item';
 
 const socket = io("http://localhost:3001");
 
-function Main(){
-    const [ user, setUser ] = useState('master');
+function Chat(props){
+
+    const { user } = props.location.state;
     const [ message, setMessage ] = useState('');
-    const [ chat, setChat ] = useState([]);
+    const [ recentChat, setRecentChet ] = useState();
+    const [ stackChat, setStackChat ] = useState([]);
 
     useEffect(() => {
         socket.emit('room','1234');
-        socket.on('pop', (msg) => {
-            
+        socket.on('pop', (usr, msg) => {
+            setRecentChet({
+                user: usr,
+                message: msg
+            });
+            console.log(recentChat);
         });
     },[]);
+
+    useEffect(() => {
+        if(recentChat){
+            setStackChat([
+                ...stackChat,
+                recentChat
+            ]);
+        }
+        setMessage('');
+    },[recentChat])
 
     const changeMessageHandler = (e) => {
         setMessage(e.target.value);
@@ -24,18 +40,7 @@ function Main(){
         e.preventDefault();
 
         if(message){
-
-            setChat([
-                ...chat,
-                {
-                    user: user,
-                    message: message
-                }
-            ]);
-
-            socket.emit("message", '1234', message);
-            
-            setMessage('');
+            socket.emit("message", '1234', user, message);
         }
     }
 
@@ -44,15 +49,12 @@ function Main(){
     return (
         <div id="chatArea">
             {
-                chat ?
-                    chat.map((obj, idx) => {
-                        return <Item key={idx} user={obj.user} message={obj.message} />
+                stackChat.length > 0 ?
+                    stackChat.map((obj, idx) => {
+                        return <Item key={idx} user={obj.user} youser={user} message={obj.message} />
                     })
                 : null
             }
-            <div>
-                <input type="text" onChange={(e) => setUser(e.target.value)} value={user} />
-            </div>
             <div id="chatForm">
                 <form onSubmit={submitHandler}>
                     <input type="text" onChange={changeMessageHandler} value={message} />
@@ -63,4 +65,4 @@ function Main(){
     )
 }
 
-export default Main;
+export default Chat;

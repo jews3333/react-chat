@@ -28,7 +28,7 @@ io.on('connection', (socket) => {
         socket.join(id);
     });
 
-    socket.on('message', (id, message) => {
-        io.to(id).emit('pop', message);
+    socket.on('message', (id, user, message) => {
+        io.to(id).emit('pop', user, message);
     });
 });
