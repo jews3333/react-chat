@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-function Sign(){
+function Sign(props){
 
     const [ user, setUser ] = useState('');
 
@@ -9,15 +8,21 @@ function Sign(){
         setUser(e.target.value);
     }
 
+    const submitHandler = () => {
+        props.history.push({
+            pathname: "/chat",
+            state: {
+                user: user
+            }
+        });
+    }
+
     return (
         <div id="sign">
-            <input type="text" onChange={changeUserHandler} value={user} />
-            <Link to={{
-                pathname: "/chat",
-                state: {
-                    user: user
-                }
-            }}>접속</Link>
+            <form onSubmit={submitHandler}>
+                <input type="text" onChange={changeUserHandler} value={user} />
+                <button type="submit">접속</button>
+            </form>
         </div>
     )
 }

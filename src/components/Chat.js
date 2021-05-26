@@ -10,7 +10,7 @@ if(process.env.NODE_ENV == 'development'){
     url = 'https://my-react-chatting.herokuapp.com:3001';
 }
 
-const socket = io('https://intense-stream-40630.herokuapp.com');
+const socket = io(url);
 
 function Chat(props){
 
@@ -20,11 +20,13 @@ function Chat(props){
     const [ stackChat, setStackChat ] = useState([]);
 
     useEffect(() => {
-        socket.emit('room','1234');
-        socket.on('pop', (usr, msg) => {
+        socket.emit('room','라떼');
+        console.log(socket);
+        socket.on('pop', (usr, msg, date) => {
             setRecentChet({
                 user: usr,
-                message: msg
+                message: msg,
+                date: date
             });
         });
     },[]);
@@ -47,7 +49,7 @@ function Chat(props){
         e.preventDefault();
 
         if(message){
-            socket.emit("message", '1234', user, message);
+            socket.emit("message", '라떼', user, message);
         }
     }
 
@@ -58,7 +60,7 @@ function Chat(props){
             {
                 stackChat.length > 0 ?
                     stackChat.map((obj, idx) => {
-                        return <Item key={idx} user={obj.user} youser={user} message={obj.message} />
+                        return <Item key={idx} user={obj.user} youser={user} message={obj.message} date={obj.date} />
                     })
                 : null
             }
