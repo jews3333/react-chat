@@ -10,7 +10,7 @@ if(process.env.NODE_ENV == 'development'){
     url = 'https://my-react-chatting.herokuapp.com:3001';
 }
 
-const socket = io('https://my-react-chatting.herokuapp.com:3001');
+const socket = io('https://intense-stream-40630.herokuapp.com');
 
 function Chat(props){
 
