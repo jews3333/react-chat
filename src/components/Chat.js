@@ -7,7 +7,7 @@ let url = '';
 if(process.env.NODE_ENV == 'development'){
     url = 'http://localhost:3001';
 } else {
-    url = 'https://my-react-chatting.herokuapp.com:3001';
+    url = 'https://my-react-chatting-server.herokuapp.com';
 }
 
 const socket = io(url);
