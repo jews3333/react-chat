@@ -5,10 +5,16 @@ import reportWebVitals from './reportWebVitals';
 import './scss/base.scss';
 import './scss/style.scss';
 
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import rootReducer from './modules';
+
+const store = createStore(rootReducer);
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
