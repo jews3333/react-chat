@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useSign from '../hooks/useSign';
 import io from 'socket.io-client';
 import Item from './Item';
 
@@ -9,14 +10,20 @@ const socket = io(url);
 
 function Chat(props){
 
-    const { user } = props.location.state;
+    const { user } = useSign(); 
     const [ message, setMessage ] = useState('');
     const [ recentChat, setRecentChet ] = useState();
     const [ stackChat, setStackChat ] = useState([]);
 
     useEffect(() => {
+        if(!user){
+            props.history.push({
+                pathname: "/"
+            });
+            return;
+        }
+
         socket.emit('room','라떼');
-        console.log(socket);
         socket.on('pop', (usr, msg, date) => {
             setRecentChet({
                 user: usr,
@@ -24,7 +31,7 @@ function Chat(props){
                 date: date
             });
         });
-    },[]);
+    },[user]);
 
     useEffect(() => {
         if(recentChat){
@@ -44,7 +51,7 @@ function Chat(props){
         e.preventDefault();
 
         if(message){
-            socket.emit("message", '라떼', user, message);
+            socket.emit("message", '라떼', user.username, message, '2021-07-23');
         }
     }
 
@@ -55,7 +62,8 @@ function Chat(props){
             {
                 stackChat.length > 0 ?
                     stackChat.map((obj, idx) => {
-                        return <Item key={idx} user={obj.user} youser={user} message={obj.message} date={obj.date} />
+                        const before = stackChat[idx-1];
+                        return <Item key={idx} user={obj.user} youser={user.username} message={obj.message} date={obj.date} before={before} idx={idx} />
                     })
                 : null
             }

@@ -1,13 +1,10 @@
 export const SIGN_IN = "SIGN_IN";
 export const SIGN_OUT = "SIGN_OUT";
 
-export const signIn = (id, password) => {
+export const signIn = (user) => {
     return {
         type: SIGN_IN,
-        payload: {
-            id: id,
-            password: password
-        }
+        payload: user
     }
 }
 

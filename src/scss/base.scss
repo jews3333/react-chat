@@ -1,3 +1,10 @@
+$point-color : #c73d3d;
+
+%button {
+    color:#fff;
+    background: $point-color;
+}
+
 @font-face {
 	font-family:'GmarketSans'; font-style:normal; font-weight:100;
 	src: url('../fonts/GmarketSansLight.woff') format('woff'), url('../fonts/GmarketSansLight.ttf') format('truetype');
@@ -39,10 +46,14 @@ a {
 button {
     font-family: inherit;
     font-size: 0.9em;
-    background:none;
     border:0;
-    border-radius: 0;
+    border-radius: 1.5em;
     cursor: pointer;
+    height:3em;
+    overflow: hidden;
+    padding:0 1.5em;
+    min-width: 100px;
+    @extend %button;
 }
 
 input[type=text],
@@ -52,9 +63,13 @@ input[type=number],
 input[type=select],
 textarea {
     padding:0 0.5em;
-    min-height: 2.5em;
-    border:1px solid #ccc;
+    min-height: 3em;
+    border:0;
+    background:#eee;
     border-radius: 0;
     font-size: 0.9em;
     font-family: inherit;
+    border-radius: 1.5em;
+    overflow:hidden;
+    box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
 }

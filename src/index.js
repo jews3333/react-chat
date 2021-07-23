@@ -7,15 +7,20 @@ import './scss/style.scss';
 
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { persistStore } from 'redux-persist';
 import rootReducer from './modules';
 
-const store = createStore(rootReducer);
+ const store = createStore(rootReducer);
+// const persistor = persistStore(store);
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <Provider store={store}>
+        {/* <PersistGate persistor={persistor}> */}
+            <App />
+        {/* </PersistGate> */}
+    </Provider>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
