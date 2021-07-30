@@ -26,7 +26,7 @@ function Sign(props){
     useEffect(() => {
         if(user){
             props.history.push({
-                pathname: "/chat"
+                pathname: "/front"
             });
         }
     },[user]);

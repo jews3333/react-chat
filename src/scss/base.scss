@@ -52,8 +52,14 @@ button {
     height:3em;
     overflow: hidden;
     padding:0 1.5em;
-    min-width: 100px;
+    min-width: 60px;
     @extend %button;
+}
+
+ul,
+li,
+ol {
+    list-style: none;
 }
 
 input[type=text],
@@ -72,4 +78,8 @@ textarea {
     border-radius: 1.5em;
     overflow:hidden;
     box-shadow: inset 1px 1px 3px rgba(0,0,0,0.3);
+}
+
+fieldset {
+    border:0;
 }

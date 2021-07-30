@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import useSign from '../hooks/useSign';
 import io from 'socket.io-client';
-import Item from './Item';
+import ChatItem from './ChatItem';
+import { formatDate } from '../common';
 
 //const url = 'https://my-react-chatting-server.herokuapp.com';
 const url = 'http://localhost:3001';
@@ -9,6 +10,8 @@ const url = 'http://localhost:3001';
 const socket = io(url);
 
 function Chat(props){
+
+    const roomId = props.match.params.id;
 
     const { user } = useSign(); 
     const [ message, setMessage ] = useState('');
@@ -23,12 +26,12 @@ function Chat(props){
             return;
         }
 
-        socket.emit('room','라떼');
+        socket.emit('room',roomId);
         socket.on('pop', (usr, msg, date) => {
             setRecentChet({
                 user: usr,
                 message: msg,
-                date: date
+                date: formatDate(date)
             });
         });
     },[user]);
@@ -51,21 +54,18 @@ function Chat(props){
         e.preventDefault();
 
         if(message){
-            socket.emit("message", '라떼', user.username, message, '2021-07-23');
+            socket.emit("message", roomId, user.username, message, new Date());
         }
     }
-
-    
 
     return (
         <div id="chatArea">
             {
-                stackChat.length > 0 ?
-                    stackChat.map((obj, idx) => {
-                        const before = stackChat[idx-1];
-                        return <Item key={idx} user={obj.user} youser={user.username} message={obj.message} date={obj.date} before={before} idx={idx} />
-                    })
-                : null
+                stackChat.length > 0 &&
+                stackChat.map((obj, idx) => {
+                    const before = stackChat[idx-1];
+                    return <ChatItem key={idx} user={obj.user} youser={user.username} message={obj.message} date={obj.date} idx={idx} before={before} />
+                })
             }
             <div id="chatForm">
                 <form onSubmit={submitHandler}>
