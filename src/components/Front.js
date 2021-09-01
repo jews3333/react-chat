@@ -16,14 +16,20 @@ function Front(props){
             });
             return;
         }
-    },[user, room]);
+    },[user]);
 
     const setCloseHandler = () => {
         setOpen(false);
     }
 
     const setDelRoomHandler = (id) => {
-        onDeleteRoom(room, id);
+        if(window.confirm('정말 삭제하시겠습니까?')) {
+            onDeleteRoom(room, id);
+
+            props.history.push({
+                pathname: props.match.path
+            });
+        }
     }
 
     return (
@@ -39,11 +45,12 @@ function Front(props){
             </div>
             <ul id="chatList">
                 {
-                    room && room.map((e,i) => {
+                    room.length > 0 ? room.map((e,i) => {
                         return (
-                            <RoomItem key={i} room={e} delRoomHandler={setDelRoomHandler} />
+                            <RoomItem key={i} room={e} deleteHandler={setDelRoomHandler} />
                         )
                     })
+                    : <li className="no-room">참여 중인 방이 없습니다.</li>
                 }
             </ul>
         </div>

@@ -8,17 +8,9 @@ export const createRoom = (room) => {
     }
 }
 
-export const deleteRoom = (room, id) => {
-    console.log(room);
-    const idx = room.findIndex((item) => {
-        return item.roomId === id;
-    })
-
-    const newRoom = room;
-    if(idx > -1) newRoom.splice(idx, 1);
-
+export const deleteRoom = (room) => {
     return {
         type: DELETE_ROOM,
-        payload: newRoom
+        payload: room
     }
 }

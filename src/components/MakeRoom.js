@@ -4,7 +4,10 @@ function MakeRoom(props){
 
     const { createHandler, closeHandler, room, open } = props;
 
-    const [ newRoom, setNewRoom ] = useState([]);
+    const [ newRoom, setNewRoom ] = useState({
+        roomNm: "",
+        roomId: ""
+    });
 
     const onChangeHandler = (e) => {
         setNewRoom({
@@ -16,10 +19,15 @@ function MakeRoom(props){
     const submitHandler = (e) => {
         e.preventDefault();
 
-        if(newRoom){
+        if(newRoom.roomNm != ""){
             createHandler([...room, newRoom]);
             closeHandler();
-            setNewRoom([]);
+            setNewRoom({
+                roomNm: "",
+                roomId: ""
+            });
+        } else {
+            alert("방 제목을 입력해주세요!");
         }
     }
 

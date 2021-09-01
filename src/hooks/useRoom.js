@@ -11,7 +11,13 @@ function useRoom(){
     }, [dispatch]);
 
     const onDeleteRoom = useCallback((room, id) => {
-        dispatch(deleteRoom(room, id));
+        const idx = room.findIndex((item) => {
+            return item.roomId === id;
+        })
+
+        if(idx > -1) room.splice(idx, 1);
+
+        dispatch(deleteRoom(room));
     }, [dispatch]);
 
     return {
