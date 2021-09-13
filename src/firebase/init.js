@@ -1,6 +1,4 @@
-import firebase from 'firebase-tools';
+import { initializeApp } from 'firebase/app';
 import Config from './config';
 
-firebase.initializeApp(Config);
-
-export const auth = firebase.auth;
+export const app = initializeApp(Config);
