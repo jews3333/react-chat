@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { signIn, signOut } from '../modules/sign';
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { app } from '../firebase/init';
 
 function useSign(){
@@ -15,11 +15,14 @@ function useSign(){
             const col = collection(db, 'user');
             const snapshot = await getDocs(col);
             const list = snapshot.docs.map(doc => doc.data());
+            const filterlist = list.filter(item => {
+                return item.id == "jews333"
+            })
 
-            return list;
+            console.log(filterlist);
         }
 
-        console.log(getData());
+        getData(db);
 
         //dispatch(signIn(user));
     }, [dispatch]);
