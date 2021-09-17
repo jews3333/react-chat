@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
 import { signIn, signOut } from '../modules/sign';
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, query, where } from "firebase/firestore";
 import { app } from '../firebase/init';
 
 function useSign(){
@@ -9,22 +9,18 @@ function useSign(){
     const dispatch = useDispatch();
     const db = getFirestore(app);
 
-    const onSignIn = useCallback((user) => {
+    const onSignIn = useCallback(async (user) => {
+        const q = query(collection(db, "user"), where("id","==", user.id), where("password","==",user.password));
 
-        async function getData(db){
-            const col = collection(db, 'user');
-            const snapshot = await getDocs(col);
-            const list = snapshot.docs.map(doc => doc.data());
-            const filterlist = list.filter(item => {
-                return item.id == "jews333"
-            })
-
-            console.log(filterlist);
+        const querySnapshot = await getDocs(q);
+        
+        if(querySnapshot.size){
+            querySnapshot.forEach((doc) => {
+                dispatch(signIn(doc.data()));
+            });
+        } else {
+            alert("아이디나 패스워드가 틀립니다.");
         }
-
-        getData(db);
-
-        //dispatch(signIn(user));
     }, [dispatch]);
 
     const onSignOut = useCallback(() => {

@@ -36,14 +36,14 @@ function Front(props){
         <div id="front">
             <div className="front-info">
                 <div>
-                    <p>{user && user.username}</p>
+                    <p>{user && user.id}</p>
                 </div>
                 <div>
                     <button onClick={() => setOpen(true)}>방만들기</button>
                     <MakeRoom createHandler={onCreateRoom} room={room} open={open} closeHandler={setCloseHandler} />
                 </div>
             </div>
-            <ul id="chatList">
+            <ul id="roomList">
                 {
                     room.length > 0 ? room.map((e,i) => {
                         return (

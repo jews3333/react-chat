@@ -4,22 +4,22 @@ import useSign from '../hooks/useSign';
 function Sign(props){
 
     const { user, onSignIn, onSignOut } = useSign();
-    const [ usr, setUsr ] = useState('');
-    const [ pwd, setPwd ] = useState('');
+    const [ id, setId ] = useState('');
+    const [ pw, setPw ] = useState('');
 
     const changeUserHandler = (e) => {
-        setUsr(e.target.value);
+        setId(e.target.value);
     }
 
     const changePwdHandler = (e) => {
-        setPwd(e.target.value);
+        setPw(e.target.value);
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
         onSignIn({
-            username: usr,
-            password: pwd
+            id: id,
+            password: pw
         });
     }
 
