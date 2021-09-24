@@ -10,9 +10,8 @@ function useSign(){
     const db = getFirestore(app);
 
     const onSignIn = useCallback(async (user) => {
-        const q = query(collection(db, "user"), where("id","==", user.id), where("password","==",user.password));
 
-        const querySnapshot = await getDocs(q);
+        const querySnapshot = await getDocs(query(collection(db, "user"), where("id","==", user.id), where("password","==",user.password)));
         
         if(querySnapshot.size){
             querySnapshot.forEach((doc) => {

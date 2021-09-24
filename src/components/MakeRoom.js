@@ -5,26 +5,23 @@ function MakeRoom(props){
     const { createHandler, closeHandler, room, open } = props;
 
     const [ newRoom, setNewRoom ] = useState({
-        roomNm: "",
-        roomId: ""
+        name: ""
     });
 
     const onChangeHandler = (e) => {
         setNewRoom({
-            roomNm: e.target.value,
-            roomId: '1234'
+            name: e.target.value
         });
     }
 
     const submitHandler = (e) => {
         e.preventDefault();
 
-        if(newRoom.roomNm != ""){
-            createHandler([...room, newRoom]);
+        if(newRoom.name !== ""){
+            createHandler(newRoom);
             closeHandler();
             setNewRoom({
-                roomNm: "",
-                roomId: ""
+                name: ""
             });
         } else {
             alert("방 제목을 입력해주세요!");
@@ -36,7 +33,7 @@ function MakeRoom(props){
             <form onSubmit={submitHandler}>
                 <fieldset form="roomForm">
                     <legend>Room 생성</legend>
-                    <input type="text" onChange={onChangeHandler} value={newRoom.roomNm} />
+                    <input type="text" onChange={onChangeHandler} value={newRoom.name} />
                     <button>생성</button>
                 </fieldset>
             </form>

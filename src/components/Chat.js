@@ -27,11 +27,11 @@ function Chat(props){
         }
 
         socket.emit('room',roomId);
-        socket.on('pop', (usr, msg, date) => {
+        socket.on('pop', (usr, msg, dt) => {
             setRecentChet({
                 user: usr,
                 message: msg,
-                date: formatDate(date)
+                date: formatDate(dt)
             });
         });
     },[user]);
@@ -54,7 +54,7 @@ function Chat(props){
         e.preventDefault();
 
         if(message){
-            socket.emit("message", roomId, user.username, message, new Date());
+            socket.emit("message", roomId, user.id, message, new Date());
         }
     }
 

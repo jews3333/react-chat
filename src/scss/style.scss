@@ -163,6 +163,7 @@
     background:#f7f7f7;
     height:calc(100vh - 5em);
     padding-top:0.5em;
+    overflow-y: auto;
 
     & > li {
         display:flex;

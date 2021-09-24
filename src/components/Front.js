@@ -6,7 +6,7 @@ import RoomItem from './RoomItem';
 
 function Front(props){
     const { user } = useSign();
-    const { room, onCreateRoom, onDeleteRoom } = useRoom();
+    const { room, onDispatchRoom, onCreateRoom, onDeleteRoom } = useRoom();
     const [ open, setOpen ] = useState(false);
 
     useEffect(() => {
@@ -16,6 +16,8 @@ function Front(props){
             });
             return;
         }
+
+        onDispatchRoom();
     },[user]);
 
     const setCloseHandler = () => {
@@ -24,7 +26,7 @@ function Front(props){
 
     const setDelRoomHandler = (id) => {
         if(window.confirm('정말 삭제하시겠습니까?')) {
-            onDeleteRoom(room, id);
+            onDeleteRoom(id);
 
             props.history.push({
                 pathname: props.match.path
@@ -45,9 +47,9 @@ function Front(props){
             </div>
             <ul id="roomList">
                 {
-                    room.length > 0 ? room.map((e,i) => {
+                    Object.keys(room).length > 0 ? Object.keys(room).map((e,i) => {
                         return (
-                            <RoomItem key={i} room={e} deleteHandler={setDelRoomHandler} />
+                            <RoomItem key={i} id={e} room={room[e]} deleteHandler={setDelRoomHandler} />
                         )
                     })
                     : <li className="no-room">참여 중인 방이 없습니다.</li>

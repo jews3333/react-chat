@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 function RoomItem(props){
 
-    const { room, deleteHandler } = props;
+    const { id, room, deleteHandler } = props;
 
     return (
         <li>
-            <Link to={`/chat/${room.roomId}`}><span>{room.roomNm}</span></Link>
-            <button onClick={() => deleteHandler(room.roomId)}>삭제</button>
+            <Link to={`/chat/${id}`}><span>{room.name}</span></Link>
+            <button onClick={() => deleteHandler(id)}>삭제</button>
         </li>
     )
 }
